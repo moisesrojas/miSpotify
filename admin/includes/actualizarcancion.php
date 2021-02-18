@@ -1,14 +1,14 @@
 <?php
 ob_start();
 include_once("config.php");
-$t = $_POST['titulo'];
-$a = $_POST['artista'];
-$al = $_POST['album'];
+$t = htmlentities($_POST['titulo'], ENT_QUOTES);
+$a = htmlentities($_POST['artista'], ENT_QUOTES);
+$al = htmlentities($_POST['album'], ENT_QUOTES);
 $g = $_POST['genero'];
 $l = $_POST['lanzamiento'];
 $c = $_POST['compositor'];
 $o = $_POST['oyentes'];
-$le = $_POST['letra'];
+$le = htmlentities($_POST['letra'], ENT_QUOTES); 
 $p = $_POST ['portada'];
 $id = $_POST['id_cancion'];
 

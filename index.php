@@ -1,7 +1,13 @@
 <?php $titulo = "Mi Spotify - FRONT END";
 include_once("admin/includes/config.php");
-$consulta = "SELECT * FROM canciones";
+$consulta = "SELECT * FROM canciones ORDER BY fechaLanzamiento DESC";
+$consultaVeinte = "SELECT * FROM canciones WHERE fechaLanzamiento >= '2020-01-01' AND fechaLanzamiento <= '2020-12-31'";
+$consultaCompositor = "SELECT * FROM canciones WHERE artista = 'The Weeknd'";
+
 $ejecutaConsulta = mysqli_query($conexion, $consulta);
+$ejecutaConsultaVeinte = mysqli_query($conexion, $consultaVeinte);
+$ejecutaConsultaCompositor = mysqli_query($conexion, $consultaCompositor);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -41,9 +47,47 @@ $ejecutaConsulta = mysqli_query($conexion, $consulta);
 	  <div class="container">
 		  <div class="row">
 			  <div class="col-12">
-				  
+				  <h1>NOVEDADES</h1>
 			  	<?php 
 			  	while ($row = mysqli_fetch_assoc($ejecutaConsulta)){
+					echo "<div class='bloque'>";
+					echo "<img class='portada' src='img/" . $row['portada'] . "'>";
+					echo "<br>";
+					echo $row['titulo'];
+					echo "</div>";
+				}
+				?>
+			  </div>
+		  </div>
+	  </div>
+  </section>
+  
+  <section id="exitos">
+	  <div class="container">
+		  <div class="row">
+			  <div class="col-12">
+				  <h1>ÉXITOS DEL 2020</h1>
+			  	<?php 
+			  	while ($row = mysqli_fetch_assoc($ejecutaConsultaVeinte)){
+					echo "<div class='bloque'>";
+					echo "<img class='portada' src='img/" . $row['portada'] . "'>";
+					echo "<br>";
+					echo $row['titulo'];
+					echo "</div>";
+				}
+				?>
+			  </div>
+		  </div>
+	  </div>
+  </section>
+  
+  <section id="compositor">
+	  <div class="container">
+		  <div class="row">
+			  <div class="col-12">
+				  <h1>Lo nuevo de The Weeknd</h1>
+			  	<?php 
+			  	while ($row = mysqli_fetch_assoc($ejecutaConsultaCompositor)){
 					echo "<div class='bloque'>";
 					echo "<img class='portada' src='img/" . $row['portada'] . "'>";
 					echo "<br>";
